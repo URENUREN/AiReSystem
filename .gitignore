@@ -1,0 +1,44 @@
+# ==============================================================================
+# AiReSystem - Git Ignore Policy (.gitignore)
+# セキュリティ・個人情報・ローカル環境保護設定
+# ==============================================================================
+
+# 1. 機密情報・実体設定ファイル (絶対にコミット不可)
+config.json
+config.json.bak
+*.env
+*.key
+*.pem
+secrets.json
+
+# 2. ローカルログ・ナレッジ・ユーザー生成データ
+logs/
+my_RAG_Vault/
+my_forge/
+*.log
+*.sqlite
+*.db
+last_media_dir.json
+project_monolith.json
+
+# 3. Python 実行時キャッシュ・コンパイル済みファイル
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# 4. ポータブルPython・環境固有ファイル
+embed-python/Scripts/
+embed-python/Lib/site-packages/__pycache__/
+embed-python/*.log
+venv/
+.venv/
+
+# 5. IDE / OS 固有の一時ファイル
+.vscode/
+.idea/
+*.swp
+Thumbs.db
+desktop.ini
+*.tmp
+*.bak

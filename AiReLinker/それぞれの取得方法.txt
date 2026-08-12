@@ -1,0 +1,19 @@
+
+Google Takeoutでのッ取得
+
+
+Google検索のAI（AI Overviews / 旧SGE）のログ
+Google Takeout の「マイ アクティビティ (My Activity)」➔ 「検索 (Search)」 にチェックを入れてダウンロード
+
+ Google NotebookLM（ノートブックLM）
+
+Google アシスタント (Google Assistant)
+
+
+AIサービス	エクスポート方法	取得できるデータ形式	特徴
+
+ChatGPT (OpenAI)	設定 ➔ データコントロール ➔ データのエクスポート	conversations.json (Zip圧縮)	全過去ログ・画像アセット・DALL-E生成画像が一括で手に入ります。
+
+Claude (Anthropic)	アカウント設定 ➔ Export Data	conversations.json (Zip圧縮)	これまでの全プロジェクト・全対話スレッドがきれいなJSONで届きます。
+
+Perplexity / Genspark	アカウント設定 ➔ エクスポート / 共有	JSON または Markdown	AI検索エンジンとしての検索スレッド・引用元リンク付きログ。

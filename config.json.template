@@ -1,0 +1,23 @@
+{
+  "_comment": "AiReSystem Configuration Template - このファイルを config.json に複製・リネームしてご利用ください。",
+  "api_settings": {
+    "gemini_api_key": "YOUR_GEMINI_API_KEY_HERE",
+    "openai_api_key": "YOUR_OPENAI_API_KEY_HERE",
+    "local_llm_url": "http://localhost:1234/v1",
+    "default_model": "gemini-1.5-pro",
+    "max_tokens": 8192,
+    "temperature": 0.7
+  },
+  "paths": {
+    "logs_dir": "./logs",
+    "rag_vault_dir": "./logs/my_RAG_Vault",
+    "forge_dir": "./logs/my_forge",
+    "portable_python_path": "./embed-python/python.exe"
+  },
+  "system": {
+    "max_worker_threads": 32,
+    "enable_multithreading": true,
+    "story_priority_mode": true,
+    "story_max_history_turns": 22
+  }
+}
