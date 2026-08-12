@@ -1,134 +1,83 @@
 # ⚓ AiReSystem (AiReAnchor Suite & AiReLinker)
-> **〜 失敗・試行錯誤・足踏みの歴史を100%完全保持し、知的資産へ昇華させるローカルナレッジプラットフォーム 〜**
-
-[![Python](https://img.shields.io/badge/Python-3.10%2B-blue.svg)](https://www.python.org/)
-[![Platform](https://img.shields.io/badge/Platform-Windows--10%20%2F%2011-0078D6.svg)]()
-[![Architecture](https://img.shields.io/badge/Architecture-Portable%20%2F%20Plugin%20Driven-green.svg)]()
-[![License](https://img.shields.io/badge/License-MIT-orange.svg)]()
+> AIとの対話履歴や試行錯誤のプロセスをローカルに保存・整理するための個人開発ナレッジツール
 
 ---
 
 ## 📖 目次
 
-1. [システム概要 ＆ 核心コンセプト](#-システム概要--核心コンセプト)
-2. [主要機能 ＆ 9大タブ完全操作ガイド](#-主要機能--9大タブ完全操作ガイド)
-3. [物理システム構成 ＆ フォルダ構造](#-物理システム構成--フォルダ構造)
-4. [セットアップ ＆ 100%ポータブル起動ガイド](#-セットアップ--100ポータブル起動ガイド)
-5. [AiReSystem 激闘の開発史（クロノツリー要約）](#-airesystem-激闘の開発史クロノツリー要約)
-6. [セキュリティ・隔離ポリシー](#-セキュリティ--隔離ポリシー)
-7. [動作要件 ＆ 推奨環境](#-動作要件--推奨環境)
+1. [概要](#-概要)
+2. [主な機能（9つのタブ）](#-主な機能)
+3. [フォルダ構成](#-フォルダ構成)
+4. [セットアップ ＆ 起動手順](#-セットアップ--起動手順)
+5. [ブラウザ拡張（Tampermonkey）の導入方法](#-ブラウザ拡張tampermonkeyの導入方法)
+6. [動作環境](#-動作環境)
+7. [ご利用上の注意・免責事項](#-ご利用上の注意免責事項)
 
 ---
 
-## 💡 システム概要 ＆ 核心コンセプト
+## 💡 概要
 
-個人開発やプログラミング、AIとの対話において生じる **「エラー、勘違い、失敗の足踏みループ、試行錯誤の歴史」を消去せずに100%完全保持・蓄積** するローカルナレッジプラットフォーム、それが **AiReSystem** です。
+**AiReSystem** は、ChatGPT、Google AI Studio、Gemini などのAIサービスとのやり取りをローカルPC上に保存し、過去のエラー解決策や試行錯誤の経緯を振り返りやすくするためのデスクトップアプリケーションです。
 
-一般的なAIログ保存ツールのように「最終的な成功コード」や「綺麗な要約」だけを残すのではなく、**「どのようにドハマりし、どう解決したか」という泥臭いプロセスそのものを資産化**します。
-
-### 🌟 3大コアテクノロジー
-- **📜 クロノツリー（年表目次生成）**: 形態素解析（Janome）と数理アルゴリズムにより、数万文字の対話から試行錯誤の節目を年表化。
-- **🧭 年表RAG（目次検索）**: 過去に購入した型番、金額、エラー解決コードを一瞬でピンポイント発掘。
-- **🔨 Forge（コンテキスト合成）**: 散らばった複数のチャットから「エラー解決の軌跡」だけを抽出し、次回のAI対話用引き継ぎプロンプトを鋳造。
+単に最終的な答えだけを残すのではなく、解決に至るまでの「失敗のやり取り」や「プログラミングの手順」をログとして手元に溜めておくことを目的としています。
 
 ---
 
-## 🖥️ 主要機能 ＆ 9大タブ完全操作ガイド
+## 🖥️ 主な機能
 
-AiReSystem は、100%ポータブル動作する9つの物理独立モジュールが1つの大黒柱コンテナ (`AiReAnchorMain.pyw`) にドッキングした構成となっています。
+1つのメイン画面（`AiReAnchorMain.pyw`）から、用途に応じた9つの機能画面を切り替えて利用します。
 
-| タブ名称 | モジュールファイル | 役割 ＆ 概要 |
-| :--- | :--- | :--- |
-| **⚓ AiReAnchorPortal** | `AiReAnchorPortalTab.pyw` | ポータル閲覧・プレビュー・年表RAG連動対話 |
-| **📊 AiReAnchorTimeline** | `AiReAnchorTimelineTab.pyw` | DAW（音楽ソフト）風 タイムラインビジュアライザー |
-| **🧭 AiReAnchorCompass** | `AiReAnchorCompassTab.pyw` | 高度論理検索 (AND/OR/NOT) ＆ AIベクトル意味検索 |
-| **🔨 AiReAnchorForge** | `AiReAnchorForgeTab.pyw` | チャットのコンテキスト切り出し・ワンタッチ結合マージ |
-| **📜 AiReChronicleTree** | `AiReChronicleTreeTab.pyw` | 形態素解析による開発史年表（クロノツリー）自動生成 |
-| **🎛️ AiReMediaPlayer** | `AiReMediaPlayer.pyw` | ログ内アセット（画像/音声/動画/GIF）の非同期再生 |
-| **🔀 AiReLinkageViewer** | `AiReLinkageViewer.pyw` | 新旧対話ログの3パネルDiff比較 ＆ アセット名統合 |
-| **📦 AiReLinkerImporter** | `AiReLinkerImporter.pyw` | Google Takeout / Drive 等の一括調停インポーター |
-| **⚙️ 環境設定** | `AiReAnchorSettingsTab.pyw` | APIキー設定・カラーテーマ・中継サーバー常駐管理 |
+* **⚓ AiReAnchorPortal**: 保存したログの閲覧や簡易プレビュー、AIとの再対話を行う画面です。
+* **📊 AiReAnchorTimeline**: チャットの作成日時や更新日時を時間軸（タイムライン）上で視覚的に並べる画面です。
+* **🧭 AiReAnchorCompass**: 保存ログからキーワード検索やタグ検索、簡易的な文脈検索を行う画面です。
+* **🔨 AiReAnchorForge**: 複数のチャットから必要なやり取り（エラー解決部分など）を選んで1つのMarkdownにまとめる画面です。
+* **📜 AiReChronicleTree**: チャット内のやり取りから流れを抽出し、年表風の目次を作成する試作機能です。
+* **🎛️ AiReMediaPlayer**: ログに付随する画像や音声・動画ファイルを一覧表示・再生する画面です。
+* **🔀 AiReLinkageViewer**: 新旧のログやテキストの差分を確認・整理するための画面です。
+* **📦 AiReLinkerImporter**: 外部からダウンロードした過去ログを一括で読み込むためのインポーターです。
+* **⚙️ 環境設定**: APIキーの設定、テーマ切替、ローカル中継サーバーの起動管理を行う画面です。
 
 ---
 
-### 1. ⚓ AiReAnchorPortal（ポータル閲覧 ＆ 統合プレビュー）
-- 左ツリーから保存されたAIサービス別チャットを選択・閲覧。
-- 中央のプレビュー画面でMarkdownの簡易装飾・インライン画像描画。
-- 右パネルの `AiReChat` により、過去ログの背景文脈（コンテキスト）を維持したまま再対話が可能。
-
-### 2. 📊 AiReAnchorTimeline（DAW風タイムライン）
-- DTM/DAWソフトのトラックビューのように、チャットの開始時刻〜最終更新時刻を横軸タイムライン上に可視化。
-- トラックの並び替え、ズームイン/ズームアウト、特定トピックの集中観察が可能。
-
-### 3. 🧭 AiReAnchorCompass（ナレッジコンパス / 複合検索）
-- 数万行のログから高速で文字検索。
-- `AND`, `OR`, `NOT` タグブロックによる直感的な絞り込み検索。
-- ローカルLLMやGemini APIを活用した「ベクトル意味検索（RAG）」対応。
-
-### 4. 🔨 AiReAnchorForge（コンテキスト合成ワークスペース）
-- 複数チャットの特定トピックや「試行錯誤のエラー解決経緯」だけを抜き出し、新たなMarkdownファイルとして鋳造（Forge）。
-- コンテキスト上限（トークン枠）を圧迫せずに次世代のAIチャットへ完璧なバトンタッチが可能。
-
-### 5. 📜 AiReChronicleTree（開発史クロノツリー生成）
-- Janome形態素解析を活用し、思考ログや口語表現を自動クレンジング。
-- ループ足踏み（「試行錯誤ループ」）を自動検知し、月満ち欠けバッジ (`🌕`, `🌖`, `🌗`) 付きで年表目次を出力。
-
-### 6. 🎛️ AiReMediaPlayer（マルチメディア再生エンジン）
-- ログに紐づく画像、GIF、音声 (WAV/MP3)、動画 (MP4/WebM) を非同期ロード。
-- カード型描画により画面をフリーズさせずにマルチメディアアセットを閲覧。
-
-### 7. 🔀 AiReLinkageViewer（3パネルDiff比較）
-- 新着ログ (`raw_incoming.md`) と本番マスターログ (`raw_scraped.md`) の差分を3パネルで目視比較。
-- MD5ハッシュ照合により、重複アセットの排除と自然順タイムラインの自動整列を実行。
-
-### 8. 📦 AiReLinkerImporter（一括調停インポーター）
-- Google Takeout (Gemini Apps, Google AI Studio) やドライブの過去ログを一括解析。
-- 「総ファイル = 検出チャット + 成功アセット + 迷子アセット」の数学的完全等式に基づき、データ損失ゼロで取り込み。
-
-### 9. ⚙️ 環境設定（システムコントロール）
-- Gemini / OpenAI / Local LLM (LM Studio, Ollama) のAPI接続設定およびテスト。
-- カラーテーマ切替（クラシック・レトロ ↔ モダン・ライト）。
-- `📡 AiReLinker 中継サーバー`（常駐ポート 5000）のワンタッチ起動および表示管理。
-
----
-
-## 📁 物理システム構成 ＆ フォルダ構造
-
-プロジェクトは拡張性・保守性を極限まで高めた **「完全プラグイン指向・モジュール分離アーキテクチャ」** を採用しています。
+## 📁 フォルダ構成
 
 ```text
-D:/program/AiReSystem/
+AiReSystem/
+├── AiReSystemを起動する.lnk       <-- メイン起動ショートカット
+├── AiReLinkerServerを起動する.lnk <-- 中継サーバー起動ショートカット
+├── run.bat                         <-- 起動用バッチファイル
+├── AiReAnchorMain.pyw              <-- メインプログラム
+├── README.md                       <-- 本取扱説明書
+├── .gitignore                      <-- Git非公開設定
+├── config.json.template            <-- 配布用設定テンプレート
 │
-├── run.bat                         <-- 🚀 100%ポータブル起動バッチスクリプト
-├── AiReAnchorMain.pyw             <-- ⚓ 【大黒柱コンテナ】100%ポータブル起動・エラー監視
-├── .gitignore                      <-- 🛡️ Git非公開セキュリティ保護定義
-├── config.json.template            <-- 📋 配布用設定テンプレート (config.json に複製して利用)
+├── 📜 各種タブ画面モジュール (.pyw)
+├── 🧠 内部処理・API通信モジュール (.pyw)
 │
-├── 📜 タブUIモジュール群（物理独立・単体動作可能）
-│   ├── AiReAnchorPortalTab.pyw     <-- ⚓ ポータル閲覧・プレビュー・年表RAG連動AiReChat
-│   ├── AiReAnchorTimelineTab.pyw   <-- 📊 DAW風 タイムラインビジュアライザー
-│   ├── AiReAnchorCompassTab.pyw    <-- 🧭 ナレッジコンパス (AND/OR/NOT・マルチスレッド検索)
-│   ├── AiReAnchorForgeTab.pyw      <-- 🔨 コンテキスト合成・マージワークスペース
-│   ├── AiReChronicleTreeTab.pyw    <-- 📜 開発史クロノツリー年表生成 (月バッジ表示)
-│   ├── AiReMediaPlayer.pyw        <-- 🎛 マルチメディア再生エンジン (動画/音声/GIF)
-│   ├── AiReLinkageViewer.pyw       <-- 🔀 3パネルDiff比較 ＆ 統括ミニマップ
-│   ├── AiReLinkerImporter.pyw      <-- 📦 一括調停インポーター (ルート起動口)
-│   └── AiReAnchorSettingsTab.pyw   <-- ⚙️ 3大用途API接続設定 ＆ 常駐コントロール
-│
-├── 🧠 裏方演算エンジン・通信ドライバー
-│   ├── AiReChronicleTreeEngine.pyw <-- 年表極限圧縮 ＆ 変化点/ループ解析エンジン
-│   ├── AiReKnots.pyw               <-- 物理統合マスター (raw_master.md) 生成エンジン
-│   ├── AiReAccessway.pyw           <-- AIオーケストレーター
-│   ├── AiReAPI.pyw                 <-- マルチLLM通信ハブ (Gemini / OpenAI / Local LLM)
-│   └── AiReChat.pyw                <-- 🤖 AI対話セッション (年表RAG参照モード搭載)
-│
-├── 📦 インポーターサブモジュール (`AiReLinker/`)
-│   ├── AiReImporterUI.py / AiReImporterLogic.py / AiReImporterDialogs.py / AiReImporterAssets.py
-│   └── parsers/ (google_ai_studio.py, gemini_web.py, ai_overviews.py)
-│
-└── 📁 データ・ポータブル環境
-    ├── embed-python/               <-- Python未インストールPC用ポータブル環境 (任意)
-    ├── logs/                       <-- ログ格納ルート
-    │   ├── my_RAG_Vault/           <-- 生成されたクロノツリー全景マップ保存先
-    │   └── my_forge/               <-- Forge合成成果物保存先
-    └── icon/                       <-- システム共通アイコンリソース (.ico)
+├── AiReLinker/                     <-- インポーター関連ファイル
+│   └── AiReLinkerExporter.user.js  <-- ブラウザ用送信スクリプト
+├── icon/                           <-- アプリ用アイコン
+└── logs/                           <-- 対話ログの保存先フォルダ
+🚀 セットアップ ＆ 起動手順
+1. 初回設定
+配布フォルダ直下にある config.json.template を複製し、ファイル名を config.json に変更します。
+必要に応じて config.json にご自身の Gemini API キー等を設定します（アプリ起動後の「環境設定」タブからも設定可能です）。
+2. 起動方法
+フォルダ直下にある AiReSystemを起動する.lnk（または run.bat）をダブルクリックしてください。
+🌐 ブラウザ拡張（Tampermonkey）の導入方法
+Webブラウザ（Google AI Studio、Gemini、ChatGPTなど）の会話ログを自動で本アプリへ送信したい場合は、以下の手順でブラウザ拡張を設定します。
+手順
+ブラウザ（Chrome / Edge 等）に拡張機能 Tampermonkey をインストールします。
+本プロジェクト内にある AiReLinker/AiReLinkerExporter.user.js のテキストをすべてコピーします。
+ブラウザの Tampermonkey アイコンをクリックし、「新規スクリプトを追加」を選択します。
+既存のコードを消して、コピーしたコードを貼り付けて保存します。
+アプリ側の「環境設定」タブ、または AiReLinkerServerを起動する.lnk から中継サーバーを起動しておくと、Web上の対話画面右下にログ送信用の操作パネルが表示されます。
+💻 動作環境
+OS: Windows 10 / Windows 11 (64-bit)
+Python: Python 3.10 以上（標準ライブラリおよび Tkinter 環境が必要）
+CPU / メモリ: 一般的な事務用・開発用PC（多コアCPUでの並列処理にも一部対応しています）
+⚠️ ご利用上の注意・免責事項
+未完成部分・誤動作について:
+本ソフトウェアは個人で開発・調整を行っているツールです。AIによる要約やテキスト抽出の際、意図しない文脈の省略や誤認（ハルシネーション）、データのパース漏れが発生する場合があります。
+バックアップについて:
+大切な対話データやファイルは、本ツールだけに頼らず定期的に別フォルダへバックアップを取ることを推奨いたします。
